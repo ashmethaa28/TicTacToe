@@ -2,6 +2,7 @@ package cis3700_a2;
 
 public class threeByThree extends board {
 
+    //Constructors
     public threeByThree() {
 
         super();
@@ -12,6 +13,9 @@ public class threeByThree extends board {
         super(3, value);
     }
 
+    /**
+     * Starts the a three by three tic tac toe game
+     */
     public void startGame() {
 
         for(int i = 0 ; i < 9 ; i++) {
@@ -20,12 +24,10 @@ public class threeByThree extends board {
             
             if(i % 2 == 0) {
 
-                setStartMoveTime();
                 userMove();
-                setFinishMoveTime();
 
                 System.out.println("\n_________________________________________________________________________________");
-                System.out.println("USER MOVE\tTime taken for move: " + (getFinishMoveTime() - getStartMoveTime()) +"ms");
+                System.out.println("USER MOVE");
 
                 if(gameWon(getBoard(), true)) {
 
@@ -68,6 +70,12 @@ public class threeByThree extends board {
 
     }
 
+    /**
+     * Checks to see if there is a tie or someone won
+     * @param board
+     * @param print
+     * @return (boolean) true or false value if there was a tie or someone won the game
+     */
     public boolean gameWon(char[][] board, boolean print) {
 
         if(hasRow(board) == 'X' || hasCol(board) == 'X' || hasDiag(board) == 'X') {
@@ -109,6 +117,9 @@ public class threeByThree extends board {
 
     }
 
+    /**
+     * Searches for the best move based of the number of moves it takes and whether the ai wins using minimax
+     */
     public void minimaxSearch() {
 
         int[] move = new int[2];
@@ -161,6 +172,13 @@ public class threeByThree extends board {
 
     }
 
+    /**
+     * finds the best move for the user based off the board provided
+     * @param board - current tic tac toe board
+     * @param depth - depth in the tree
+     * @param startTime - when the ai started to make a move
+     * @return (int[]) - best score and best depth
+     */
     public int[] minValue(char[][] board, int depth, long startTime) {
 
         int[] status = new int[2];
@@ -226,6 +244,13 @@ public class threeByThree extends board {
 
     }
 
+    /**
+     * finds the best move for the ai based off the board provided
+     * @param board - current tic tac toe board
+     * @param depth - depth in the tree
+     * @param startTime - when the ai started to make a move
+     * @return (int[]) - best score and best depth
+     */
     public int[] maxValue(char[][] board, int depth, long startTime) {
 
         int[] status = new int[2];
@@ -291,6 +316,9 @@ public class threeByThree extends board {
         
     }
 
+    /**
+     * Searches for the best move based of the number of moves it takes and whether the ai wins using alpha beta
+     */
     public void alphaBetaSearch() {
 
         int[] move = new int[2];
@@ -345,6 +373,15 @@ public class threeByThree extends board {
 
     }
 
+    /**
+     * Finds the best move for the ai
+     * @param board - current board
+     * @param depth - current depth in the tree
+     * @param startTime - start time for when the ai started to calculate it's move
+     * @param alpha - highest value maximizer found
+     * @param beta - lowest value minimizer found
+     * @return (int[]) - best result and best depth
+     */
     public int[] alphaBetaMax(char[][] board, int depth, long startTime, double alpha, double beta) {
 
         int[] status = new int[2];
@@ -425,6 +462,15 @@ public class threeByThree extends board {
 
     }
 
+    /**
+     * Finds the best move for the user
+     * @param board - current board
+     * @param depth - current depth in the tree
+     * @param startTime - start time for when the ai started to calculate it's move
+     * @param alpha - highest value maximizer found
+     * @param beta - lowest value minimizer found
+     * @return (int[]) - best result and best depth
+     */
     public int[] alphaBetaMin(char[][] board, int depth, long startTime, double alpha, double beta) {
         
         int[] status = new int[2];

@@ -12,6 +12,7 @@ public class board {
     private int nodeExplored;
     private int deepestDepth;
 
+    //Constructors
     public board() {
 
         setSize(3);
@@ -28,54 +29,87 @@ public class board {
 
     }
 
+    /**
+     * Sets the start time of the move
+     */
     public void setStartMoveTime() {
 
         startMove = System.currentTimeMillis();
 
     }
 
+    /**
+     *  Gets the starts time of the move
+     * @return (long) - start time
+     */
     public long getStartMoveTime() {
 
         return startMove;
 
     }
 
+    /**
+     * Sets time that move finished
+     */
     public void setFinishMoveTime() {
 
         finishMove = System.currentTimeMillis();
 
     }
 
+    /**
+     * Gets time that the move finished
+     * @return (long) - finish time
+     */
     public long getFinishMoveTime() {
 
         return finishMove;
 
     }
 
+    /**
+     * Sets the current number of nodes explored
+     * @param node - number of nodes explored
+     */
     public void setNodeCount(int node) {
 
         nodeExplored = node;
 
     }
 
+    /**
+     * Adds one to the current number of nodes explored
+     */
     public void addToNodeCount() {
 
         setNodeCount(getNodeCount() + 1);
 
     }
 
+    /**
+     * Gets the total number of nodes explored
+     * @return - number of nodes explored
+     */
     public int getNodeCount() {
 
         return nodeExplored;
 
     }
 
+    /**
+     * Sets deepest depth explored
+     * @param depth - new deepest depth
+     */
     public void setDeepestDepth(int depth) {
 
         deepestDepth = depth;
 
     }
 
+    /**
+     * Checks to see if new depth is deeper than current deepest depth to resets deepest depth if so
+     * @param newDepth - new depth
+     */
     public void validNewDepth(int newDepth) {
 
         if(newDepth > getDepth() && newDepth != getSize() * getSize()) {
@@ -86,36 +120,59 @@ public class board {
 
     }
 
+    /**
+     * Gets the deepest depth explored
+     * @return (int) - deepest depth explored
+     */
     public int getDepth() {
 
         return deepestDepth;
 
     }
 
+    /**
+     * Sets true or false to minimax search
+     * @param value - true or false to use minimax search
+     */
     public void setSearchType(boolean value) {
 
         minimax = value;
 
     }
 
+    /**
+     * Get search type that is being used
+     * @return (boolean) - true or false whether minimax search is being used
+     */
     public boolean getSearchType() {
 
         return minimax;
         
     }
 
+    /**
+     * Set size of the board
+     * @param size - size of board
+     */
     public void setSize(int size) {
 
         boardSize = size;
 
     }
 
+    /**
+     * Get size of the board
+     * @return (int) - size of board
+     */
     public int getSize() {
 
         return boardSize;
 
     }
 
+    /**
+     * Set empty board
+     */
     public void setBoard() {
 
         for (int x = 0 ; x < getSize() ; x++) {
@@ -130,6 +187,9 @@ public class board {
 
     }
 
+    /**
+     * Display board
+     */
     public void displayBoard() {
 
         char[][] currentBoard = getBoard();
@@ -172,12 +232,22 @@ public class board {
         return;
     }
 
+    /**
+     * Get board
+     * @return (char[][]) - tic tac toe board
+     */
     public char[][] getBoard() {
 
         return board;
 
     }
 
+    /**
+     * check the users move is to an empty space
+     * @param row - user row input
+     * @param col - user column input
+     * @return (boolean) - true or false based off the fact if the space is empty
+     */
     public boolean checkInvalidInput(int row, int col) {
 
         char[][] board = getBoard();
@@ -192,6 +262,9 @@ public class board {
         return false;
     }
 
+    /**
+     * Get user move and check if move is valid
+     */
     public void userMove() {
 
         Scanner scanner = new Scanner(System.in);
@@ -245,6 +318,12 @@ public class board {
 
     }
 
+    /**
+     * Insert move onto the board
+     * @param row - row of the move
+     * @param col - column of the move
+     * @param userMove - character that is being placed on the board
+     */
     public void inputMove(int row, int col, char userMove) {
 
         board[row - 1][col - 1] = userMove;
@@ -252,6 +331,11 @@ public class board {
         return;
     }
 
+    /**
+     * Checks for winning condition of having a full row
+     * @param board - current board
+     * @return (char) - character that has the winning condition
+     */
     public char hasRow(char[][] board) {
 
         for(int i = 0 ; i < getSize() ; i++) {
@@ -280,6 +364,11 @@ public class board {
 
     }
 
+    /**
+     * Checks for winning condition of having a full column
+     * @param board - current board
+     * @return (char) - character with the winning condition
+     */
     public char hasCol(char[][] board) {
 
         for(int i = 0 ; i < getSize() ; i++) {
@@ -308,6 +397,11 @@ public class board {
         
     }
 
+    /**
+     * Checks for winning condition of a full diagonal
+     * @param board - current board
+     * @return (char) - character with the winning condition
+     */
     public char hasDiag(char[][] board) {
 
         boolean diagOne = true;
