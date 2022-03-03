@@ -351,7 +351,7 @@ public class fiveByFive extends board {
      */
     public char hasPlus(char[][] board) {
 
-        for(int x = 1 ; x < getSize() - 2 ; x++) {
+        for(int x = 1 ; x < getSize() - 1 ; x++) {
 
             for(int y = 0 ; y < getSize() - 2 ; y++) {
 
@@ -491,16 +491,16 @@ public class fiveByFive extends board {
 
         int[] status = new int[2];
 
-        if (isTie(board)) {
-
-            status[0] = 0;
-            status[1] = depth;
-            return status;
-
-        } else if(gameWon(board, false)) {
+        if(gameWon(board, false)) {
 
             status[1] = depth;
             status[0] = -1;
+            return status;
+
+        } else if (isTie(board)) {
+
+            status[0] = 0;
+            status[1] = depth;
             return status;
 
         } else if(System.currentTimeMillis() - startTime >= 60000) {
@@ -580,16 +580,16 @@ public class fiveByFive extends board {
         
         int[] status = new int[2];
 
-        if (isTie(board)) {
-
-            status[0] = 0;
-            status[1] = depth;
-            return status;
-
-        } else if(gameWon(board, false)) {
+        if(gameWon(board, false)) {
 
             status[1] = depth;
             status[0] = 1;
+            return status;
+
+        } else if (isTie(board)) {
+
+            status[0] = 0;
+            status[1] = depth;
             return status;
 
         } else if(System.currentTimeMillis() - startTime >= 60000) {

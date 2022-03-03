@@ -14,6 +14,10 @@ class ticTacToe{
             System.out.print("What type of tic-tac-toe game would you like to play? Please enter a number from 1-4.\n1 - 3x3\n2 - 4x4\n3 - 5x5\n4 - Exit\n>>> ");
             gameType = scanner.nextInt();
 
+            if(gameType == 4) {
+                break;
+            }
+
             int aiType = 0;
             while(aiType < 1 || aiType > 2) {
 

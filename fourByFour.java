@@ -16,7 +16,7 @@ public class fourByFour extends board {
     }
 
     /**
-     * Starts the a three by three tic tac toe game
+     * Starts the a four by four tic tac toe game
      */
     public void startGame() {
 
@@ -132,6 +132,7 @@ public class fourByFour extends board {
         double bestDepth = Double.POSITIVE_INFINITY;
         long startTime = System.currentTimeMillis();
 
+        // checks every possible out come
         for(int x = 0 ; x < getSize() ; x++) {
 
             for(int y = 0 ; y < getSize() ; y++) {
@@ -145,13 +146,15 @@ public class fourByFour extends board {
 
                     board[x][y] = '*';
 
+                    // saves the move that has a better result
                     if(status[0] > bestScore) {
 
                         bestScore = status[0];
                         bestDepth = status[1];
                         move[0] = x;
                         move[1] = y;
-                        
+                    
+                    // saves the move that takes less moves for the same result
                     } else if(status[0] == bestScore && bestDepth > status[1]) {
 
                         bestDepth = status[1];
@@ -168,6 +171,7 @@ public class fourByFour extends board {
 
         }
 
+        // sets the ai move for this turn
         inputMove(move[0] + 1, move[1] + 1, 'O');
 
         return;
@@ -185,19 +189,22 @@ public class fourByFour extends board {
 
         int[] status = new int[2];
 
-        if (isTie(board)) {
-
-            status[0] = 0;
-            status[1] = depth;
-            return status;
-
-        } else if(gameWon(board, false)) {
+        //checks to see if there is already a winning condition on the board
+        if(gameWon(board, false)) {
 
             status[1] = depth;
             status[0] = 1;
             return status;
 
-        } else if(System.currentTimeMillis() - startTime >= 60000) {
+        //checks to see if the board provided is in a tie
+        } else if (isTie(board)) {
+
+            status[0] = 0;
+            status[1] = depth;
+            return status;
+
+        // checks if the ai is taking longer than a minute to complete a move
+        } else  if(System.currentTimeMillis() - startTime >= 60000) {
 
             status[0] = 0;
             status[1] = getSize() * getSize();
@@ -209,6 +216,7 @@ public class fourByFour extends board {
         double bestScore = Double.POSITIVE_INFINITY;
         double bestDepth = Double.POSITIVE_INFINITY;
 
+        // checks every possible out come
         for(int x = 0 ; x < getSize() ; x++) {
 
             for(int y = 0 ; y < getSize() ; y++) {
@@ -222,11 +230,13 @@ public class fourByFour extends board {
 
                     board[x][y] = '*';
 
+                    // saves the move that has a better result for the user
                     if(status[0] < bestScore) {
 
                         bestScore = status[0];
                         bestDepth = status[1];
-                        
+
+                    // saves the move that has the same result but smaller amount of moves to get there
                     } else if(status[0] == bestScore && bestDepth > status[1]) {
 
                         bestDepth = status[1];
@@ -257,18 +267,21 @@ public class fourByFour extends board {
 
         int[] status = new int[2];
 
-        if (isTie(board)) {
+        //checks to see if there is already a winning condition on the board
+        if(gameWon(board, false)) {
+
+            status[1] = depth;
+            status[0] = -1;
+            return status;
+        
+        //checks to see if the board provided is in a tie
+        } else if (isTie(board)) {
 
             status[0] = 0;
             status[1] = depth;
             return status;
 
-        } else if(gameWon(board, false)) {
-
-            status[1] = depth;
-            status[0] = -1;
-            return status;
-
+        // checks if the ai is taking longer than a minute to complete a move
         } else if(System.currentTimeMillis() - startTime >= 60000) {
 
             status[0] = 0;
@@ -281,6 +294,7 @@ public class fourByFour extends board {
         double bestScore = Double.NEGATIVE_INFINITY;
         double bestDepth = Double.POSITIVE_INFINITY;
 
+        // checks every possible out come
         for(int x = 0 ; x < getSize() ; x++) {
 
             for(int y = 0 ; y < getSize() ; y++) {
@@ -294,11 +308,13 @@ public class fourByFour extends board {
 
                     board[x][y] = '*';
 
+                    // saves the move that has a better result for the ai
                     if(status[0] > bestScore) {
 
                         bestScore = status[0];
                         bestDepth = status[1];
-                        
+                    
+                    // saves the move that has the same result but smaller amount of moves to get there
                     } else if(status[0] == bestScore && bestDepth > status[1]) {
 
                         bestDepth = status[1];
@@ -353,7 +369,7 @@ public class fourByFour extends board {
      */
     public char hasDiamond(char[][] board) {
 
-        for(int x = 1 ; x < getSize() - 2 ; x++) {
+        for(int x = 1 ; x < getSize() - 1 ; x++) {
 
             for(int y = 0 ; y < getSize() - 2 ; y++) {
 
@@ -444,16 +460,16 @@ public class fourByFour extends board {
 
         int[] status = new int[2];
 
-        if (isTie(board)) {
-
-            status[0] = 0;
-            status[1] = depth;
-            return status;
-
-        } else if(gameWon(board, false)) {
+        if(gameWon(board, false)) {
 
             status[1] = depth;
             status[0] = -1;
+            return status;
+
+        } else if (isTie(board)) {
+
+            status[0] = 0;
+            status[1] = depth;
             return status;
 
         } else if(System.currentTimeMillis() - startTime >= 60000) {
@@ -533,16 +549,16 @@ public class fourByFour extends board {
         
         int[] status = new int[2];
 
-        if (isTie(board)) {
-
-            status[0] = 0;
-            status[1] = depth;
-            return status;
-
-        } else if(gameWon(board, false)) {
+        if(gameWon(board, false)) {
 
             status[1] = depth;
             status[0] = 1;
+            return status;
+
+        } else if (isTie(board)) {
+
+            status[0] = 0;
+            status[1] = depth;
             return status;
 
         } else if(System.currentTimeMillis() - startTime >= 60000) {
